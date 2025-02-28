@@ -1,0 +1,64 @@
+body {
+    margin: 0;
+    margin-top: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.urna {
+    background-color: #413438;
+    padding: 30px;
+    display: flex;
+}
+.tela {
+    width: 500px;
+    height: 320px;
+    background-color: #E7D5BD;
+}
+.teclado {
+    background-color: #604B48;
+}
+.teclado--botao {
+width: 70px;
+height: 40px;
+background-color: #FDFDFD;
+color: #000;
+font-size: 25px;
+display: flex;
+justify-content: center;
+align-items: center;
+margin: 10px;
+cursor: pointer;
+box-shadow: 2px 2px 0px #0f0f0f9a;
+border-radius: 5px;
+}
+.branco {
+    background-color: #fff;
+    color: #000;
+    width: 100px;
+    height: 30px;
+    font-size: 17px;
+}
+.corrige {
+    background-color: #F6B441;
+    color: #000;
+    width: 100px;
+    height: 30px;
+    font-size: 17px;
+}
+.confirma {
+    background-color: #306B4F;
+    color: #fff;
+    width: 130px;
+    font-size: 21px;
+}
+.teclado--linha {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.botoes {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
