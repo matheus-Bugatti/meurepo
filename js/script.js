@@ -7,11 +7,13 @@ let numeros = document.querySelector('.d-1-3');
 
 let etapaAtual = 0;
 let numero = ""
+let votoBranco = false
 
 function comecarEtapa() {
     let etapa = etapas[etapaAtual]
     let numeroHtml = ""
-
+    numero = ''
+    votoBranco = false
 
     for (let cont = 0; cont < etapa.numeros; cont++) {
         if (cont == 0) {
@@ -38,7 +40,7 @@ function atualizarInterface() {
             return false
         }
     })
-    if (candidato.lenght > 0 ) {
+    if (candidato.length > 0) {
         candidato = candidato[0]
         seuVotoPara.style.display = 'block'
         aviso.style.display = 'block'
@@ -46,7 +48,11 @@ function atualizarInterface() {
 
         let fotosHtml = ''
         for (let i in candidato.foto) {
-            fotosHtml += `<div class="d-1-image"><img src="img/${candidato.foto[i].url}" alt=""> ${candidato.foto[i].legenda}</div>`
+            if (candidato.foto[i].small) {
+                fotosHtml += `<div class="d-1-image small"><img src="img/${candidato.foto[i].url}" alt=""> ${candidato.foto[i].legenda}</div>`
+            } else {
+                fotosHtml += `<div class="d-1-image"><img src="img/${candidato.foto[i].url}" alt=""> ${candidato.foto[i].legenda}</div>`
+            }
         }
         lateral.innerHTML = fotosHtml
     } else {
@@ -70,10 +76,39 @@ function clicou(n) {
     }
 }
 function corrige() {
-    alert("clicou em corrige")
+    comecarEtapa()
 }
 function branco() {
-    alert("clicou em branco")
+    if (numero === '') {
+        votoBranco = true
+        seuVotoPara.style.display = 'block'
+        aviso.style.display = 'block'
+        numeros.innerHTML = ''
+        descricao.innerHTML = '<div class="aviso--grande pisca">VOTO EM BRANCO </div>'
+    } else {
+        alert("PARA VOTAR EM BRANCO, NÃO POD ETER DIGITADO NENHUM NÚMERO!\nCLIQUE EM CORRIGIR PARA MUDAR SEU VOTO")
+    }
+}
+function confirma() {
+    let etapa = etapas[etapaAtual]
+    let votoConfirmado = false
+    if (votoBranco) {
+        votoConfirmado = true
+        console.log('Confirmando como Branco...')
+    } else if (numero.length === etapa.numeros) {
+        votoConfirmado = true
+        console.log('confirmando como ' + numero)
+    } else {
+        alert("Número incompleto!")
+    }
+    if (votoConfirmado) {
+        etapaAtual++
+        if (etapas[etapaAtual] !== undefined) {
+            comecarEtapa()
+        } else {
+            document.querySelector('.tela').innerHTML = '<div class="aviso--gigante pisca">FIM</div>'
+        }
+    }
 }
 
-comecarEtapa()
+comecarEtapa() 
